@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Kurlöttens Måleri</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: "Poppins", sans-serif;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #d2691e;
+      font-size: 1.8em;
+      font-weight: 600;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      color: #333;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #d2691e;
+      text-decoration: underline;
+    }
+
+    .contact-section {
+      background: url('https://cdn.pixabay.com/photo/2016/11/29/06/18/paint-1867784_1280.jpg') no-repeat center center/cover;
+      padding: 80px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-form {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .contact-form h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: #d2691e;
+      text-align: center;
+    }
+
+    .contact-form label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .contact-form button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #d2691e;
+      color: white;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background-color: #b05516;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Kurlöttens Måleri</h1>
+    <nav>
+      <a href="index.html">Hem</a>
+      <a href="tjanster.html">Tjänster</a>
+      <a href="rot-avdrag.html">ROT-avdrag</a>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kontakt.html" class="active">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="contact-section">
+    <form class="contact-form">
+      <h2>Kontakta oss</h2>
+      <label for="namn">Namn</label>
+      <input type="text" id="namn" name="namn" required>
+
+      <label for="email">E-post</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="tjanst">Vad gäller ärendet?</label>
+      <select id="tjanst" name="tjanst">
+        <option value="fasadmålning">Fasadmålning</option>
+        <option value="fasadtvätt">Fasadtvätt</option>
+        <option value="väggmålning">Väggmålning</option>
+        <option value="takmålning">Takmålning</option>
+        <option value="inomhusmålning">Inomhusmålning</option>
+        <option value="detaljmålning">Detaljmålning</option>
+        <option value="annat">Annat</option>
+      </select>
+
+      <label for="meddelande">Meddelande</label>
+      <textarea id="meddelande" name="meddelande" rows="5" required></textarea>
+
+      <button type="submit">Skicka meddelande</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Kurlöttens Måleri – All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

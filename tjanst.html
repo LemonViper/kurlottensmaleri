@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tjänst – Kurlöttens Måleri</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #d2691e;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #d2691e;
+      text-decoration: underline;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .content img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .content h2 {
+      color: #d2691e;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Kurlöttens Måleri</h1>
+    <nav>
+      <a href="index.html">Hem</a>
+      <a href="tjanster.html">Tjänster</a>
+      <a href="rot-avdrag.html">ROT-avdrag</a>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="content" id="tjanstContainer">
+    <!-- Innehållet laddas här med JavaScript -->
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Kurlöttens Måleri – All rights reserved.</p>
+  </footer>
+
+  <script>
+    const tjänster = {
+      "fasadmålning": {
+        titel: "Fasadmålning",
+        bild: "bilder/fasadmålning_ett.jpg",
+        beskrivning: "En snygg och skyddande fasadmålning förlänger husets livslängd och höjer värdet på din fastighet. Vi använder kvalitetsfärg anpassad för svenska klimatförhållanden."
+      },
+      "fasadtvatt": {
+        titel: "Fasadtvätt",
+        bild: "bilder/fasadtvätt_ett.jpg",
+        beskrivning: "Fasadtvätt avlägsnar alger, smuts och mögel innan målning eller som underhåll. Vi använder miljövänliga metoder och professionell utrustning."
+      },
+      "väggmålning": {
+        titel: "Väggmålning",
+        bild: "bilder/målare_tre.jpg",
+        beskrivning: "Fräscha upp dina väggar med ett nytt lager färg. Vi erbjuder allt från enfärgsmålning till dekorativa tekniker – alltid med noggrant underarbete."
+      },
+      "takmålning": {
+        titel: "Takmålning",
+        bild: "bilder/måleri_ett.jpg",
+        beskrivning: "Ett nymålat tak skyddar mot väder och vind och förbättrar husets helhetsintryck. Vi hjälper dig välja rätt färg och metod för just ditt tak."
+      },
+      "inomhusmålning": {
+        titel: "Inomhusmålning",
+        bild: "bilder/målare_fyra.jpg",
+        beskrivning: "Vi målar innertak, väggar, snickerier och mer – alltid med fokus på noggrannhet, dammfritt arbete och ett perfekt slutresultat."
+      },
+      "detaljmålning": {
+        titel: "Detaljmålning",
+        bild: "bilder/måleri_allmänt_två.jpg",
+        beskrivning: "Detaljmålning ger hemmet personlighet. Vi målar lister, fönsterkarmar och andra detaljer med precision och känsla för stil."
+      }
+    };
+
+    function getParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const param = getParam("tjanst");
+    const data = tjänster[param];
+
+    const container = document.getElementById("tjanstContainer");
+
+    if (data) {
+      container.innerHTML = `
+        <img src="${data.bild}" alt="${data.titel}">
+        <h2>${data.titel}</h2>
+        <p>${data.beskrivning}</p>
+      `;
+    } else {
+      container.innerHTML = "<h2>Tjänsten kunde inte hittas.</h2><p>Gå tillbaka till <a href='tjanster.html'>Tjänster</a>.</p>";
+    }
+  </script>
+</body>
+</html>
