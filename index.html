@@ -104,20 +104,20 @@
 
     .services {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      flex-wrap: nowrap;
-      gap: 30px;
-      overflow-x: auto;
+      gap: 20px;
     }
 
     .service-card {
-      min-width: 280px;
+      width: 280px;
       background-color: #f0f0f0;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       transition: transform 0.2s ease;
-      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
     }
 
     .service-card:hover {
@@ -143,13 +143,6 @@
       padding: 30px 10px;
     }
 
-    @media (max-width: 1024px) {
-      .services {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-
     @media (max-width: 768px) {
       .hero {
         align-items: center;
@@ -166,7 +159,12 @@
       }
 
       .services {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-card {
+        width: 90%;
       }
     }
   </style>
@@ -193,26 +191,26 @@
   <section class="section">
     <h3>Våra mest populära tjänster</h3>
     <div class="services">
-      <div class="service-card">
+      <a href="kontakt.html#form" class="service-card">
         <img src="bilder/fasadmålning_tre.jpg" alt="Fasadmålning">
         <h4>Fasadmålning</h4>
-      </div>
-      <div class="service-card">
+      </a>
+      <a href="kontakt.html#form" class="service-card">
         <img src="bilder/målare_tre.jpg" alt="Väggmålning">
         <h4>Väggmålning</h4>
-      </div>
-      <div class="service-card">
+      </a>
+      <a href="kontakt.html#form" class="service-card">
         <img src="bilder/fasadtvätt_två.jpg" alt="Fasadtvätt">
         <h4>Fasadtvätt</h4>
-      </div>
-      <div class="service-card">
+      </a>
+      <a href="kontakt.html#form" class="service-card">
         <img src="bilder/målare_tre.jpg" alt="Takmålning">
         <h4>Takmålning</h4>
-      </div>
+      </a>
     </div>
   </section>
 
-  <footer style="background-color: #222; color: white; padding: 30px 10px;">
+  <footer>
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
       <div style="margin-bottom: 15px;">
         <p style="margin: 5px 0;">📞 +46 72-227 20 24</p>
