@@ -6,11 +6,7 @@
   <title>Kontakt – Kurlöttens Måleri</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body, html {
       height: 100%;
@@ -26,11 +22,7 @@
       align-items: center;
     }
 
-    header h1 {
-      color: #d2691e;
-      font-size: 1.8em;
-      font-weight: 600;
-    }
+    header h1 { color: #d2691e; font-size: 1.8em; font-weight: 600; }
 
     nav a {
       text-decoration: none;
@@ -39,12 +31,7 @@
       color: #333;
       transition: 0.2s;
     }
-
-    nav a:hover,
-    nav a.active {
-      color: #d2691e;
-      text-decoration: underline;
-    }
+    nav a:hover, nav a.active { color: #d2691e; text-decoration: underline; }
 
     .contact-section {
       background: url('https://cdn.pixabay.com/photo/2016/11/29/06/18/paint-1867784_1280.jpg') no-repeat center center/cover;
@@ -71,11 +58,7 @@
       text-align: center;
     }
 
-    .contact-form label {
-      display: block;
-      margin: 15px 0 5px;
-      font-weight: 600;
-    }
+    .contact-form label { display: block; margin: 15px 0 5px; font-weight: 600; }
 
     .contact-form input,
     .contact-form textarea,
@@ -98,10 +81,20 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .contact-form button:hover { background-color: #b05516; }
 
-    .contact-form button:hover {
-      background-color: #b05516;
+    /* Statusruta */
+    .status {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      display: none;        /* visas via JS */
+      align-items: center;
+      gap: 8px;
     }
+    .status.success { background: #e8f7ef; color: #186a3b; border: 1px solid #bfe8cf; }
+    .status.error   { background: #fdecea; color: #7a1c1c; border: 1px solid #f5c6cb; }
 
     footer {
       background-color: #222;
@@ -125,8 +118,13 @@
   </header>
 
   <section class="contact-section">
-    <form class="contact-form">
+    <!-- Kopplat till Formspree + ankar-ID för #form -->
+    <form id="form" class="contact-form" action="https://formspree.io/f/mrbllwpw" method="POST">
       <h2>Kontakta oss</h2>
+
+      <!-- Ämnesrad till mailet (valfritt men trevligt) -->
+      <input type="hidden" name="_subject" value="Nytt meddelande via kurlottensmaleri.se" />
+
       <label for="namn">Namn</label>
       <input type="text" id="namn" name="namn" required>
 
@@ -135,19 +133,22 @@
 
       <label for="tjanst">Vad gäller ärendet?</label>
       <select id="tjanst" name="tjanst">
-        <option value="fasadmålning">Fasadmålning</option>
-        <option value="fasadtvätt">Fasadtvätt</option>
-        <option value="väggmålning">Väggmålning</option>
-        <option value="takmålning">Takmålning</option>
-        <option value="inomhusmålning">Inomhusmålning</option>
-        <option value="detaljmålning">Detaljmålning</option>
-        <option value="annat">Annat</option>
+        <option value="Fasadmålning">Fasadmålning</option>
+        <option value="Fasadtvätt">Fasadtvätt</option>
+        <option value="Väggmålning">Väggmålning</option>
+        <option value="Takmålning">Takmålning</option>
+        <option value="Inomhusmålning">Inomhusmålning</option>
+        <option value="Detaljmålning">Detaljmålning</option>
+        <option value="Annat">Annat</option>
       </select>
 
       <label for="meddelande">Meddelande</label>
       <textarea id="meddelande" name="meddelande" rows="5" required></textarea>
 
       <button type="submit">Skicka meddelande</button>
+
+      <!-- Statusruta visas efter försök att skicka -->
+      <div id="form-status" class="status" aria-live="polite"></div>
     </form>
   </section>
 
@@ -162,6 +163,44 @@
     </div>
   </footer>
 
+  <script>
+    // Skicka formuläret via fetch (AJAX) för att kunna visa grön/röd status på sidan
+    const form = document.getElementById('form');
+    const statusBox = document.getElementById('form-status');
 
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          // Lyckat
+          statusBox.className = 'status success';
+          statusBox.textContent = '✅ Tack! Ditt meddelande har skickats.';
+          statusBox.style.display = 'flex';
+          form.reset();
+        } else {
+          // Formspree kan returnera valideringsfel i JSON
+          const json = await res.json().catch(() => ({}));
+          statusBox.className = 'status error';
+          statusBox.textContent = json?.errors?.[0]?.message
+            ? `❌ ${json.errors[0].message}`
+            : '❌ Något gick fel. Försök igen om en stund.';
+          statusBox.style.display = 'flex';
+        }
+      } catch (err) {
+        statusBox.className = 'status error';
+        statusBox.textContent = '❌ Kunde inte skicka just nu. Kontrollera din uppkoppling och försök igen.';
+        statusBox.style.display = 'flex';
+      }
+    });
+  </script>
 </body>
 </html>
